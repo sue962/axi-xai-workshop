@@ -1,0 +1,39 @@
+# Large data / archives
+9) Car-Hacking Dataset/
+*.zip
+*.7z
+
+# Office / template files
+*.docx
+*.hwp
+*.pdf
+
+# Drafts / planning (not part of the public repo)
+paper/
+ROADMAP.md
+
+# Local tooling
+.claude/
+.venv/
+venv/
+.env
+.vscode/
+.idea/
+
+# OS / system
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.jupyter/
+
+# Build artefacts
+*.egg-info/
+dist/
+build/
