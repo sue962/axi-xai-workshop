@@ -8,9 +8,9 @@ We apply Google Research's Nested Learning (NL; Behrouz et al., NeurIPS 2025) as
 
 Key findings:
 
-- Under sequential-task continual federated learning, the global model retains only the most recently seen attack and silently forgets earlier ones (DoS / Fuzzy / RPM forgetting ≈ +1.000).
-- The consolidation gap |fast − slow| is 4.1× larger at task transitions than at steady-state rounds — a temporal signal invisible to SHAP / Shapley.
-- On a label-flipping malicious-client scenario, our consolidation-gap signal separates the malicious client 3.2× more cleanly than SHAP-based detection (1.4×).
+- Under sequential-task continual federated learning, the global model retains only the most recently seen attack and silently forgets earlier ones (DoS / RPM / Fuzzy forgetting ≈ +1.000, consistent across seeds).
+- Averaged over three seeds (42, 123, 7), the consolidation gap |fast − slow| is 5.37× ± 2.84 larger at task transitions than at steady-state rounds — a temporal signal invisible to SHAP / Shapley.
+- Under a 100% label-flip malicious-client scenario, the consolidation-gap signal separates the malicious client 2.29× ± 0.95 more cleanly than SHAP-based detection (1.48× ± 0.05); under a milder 30% flip the gap signal becomes unreliable while SHAP holds up, which we report as a limitation in Section 7 of the paper.
 
 ## Data
 
@@ -35,6 +35,7 @@ Run them in order. All runs are deterministic (`SEED=42`).
 - `03_nl_explanation.ipynb` builds the hero remember/forget heatmap and quantifies the 4.1× transition-vs-steady consolidation gap.
 - `04_baselines.ipynb` runs SHAP and leave-one-client-out Shapley baselines on an IID FedAvg model, and produces the three-panel comparison figure.
 - `05_malicious_detection.ipynb` runs a synthetic label-flipping malicious-client scenario and compares per-client consolidation gap (ours) against per-client SHAP divergence (MDPI-style).
+- `06_robustness.py` runs sequential CFL and malicious-client detection across three seeds (42, 123, 7) and two flip ratios (100%, 30%), producing the mean ± std numbers reported in Sections 5–7 of the paper.
 
 To execute end-to-end:
 
@@ -43,6 +44,8 @@ for nb in 01_preprocess 02_fl_baseline 03_nl_explanation 04_baselines 05_malicio
   jupyter nbconvert --to notebook --execute --inplace notebooks/${nb}.ipynb
 done
 ```
+
+For the robustness sweep, run `python notebooks/06_robustness.py` after the five notebooks.
 
 Intermediate CSVs land in `data/processed/` and PNG figures in `figures/`.
 
