@@ -1,0 +1,23 @@
+======================================================================
+ROBUSTNESS SUMMARY — mean ± std across 3 seeds (42, 123, 7)
+======================================================================
+
+[A] Sequential CFL (notebook 02 + 03 reproduction):
+  Consolidation-gap ratio (transition / steady): 5.37 ± 2.84
+  Transition-round mean gap: 0.0372 ± 0.0093
+  Steady-round mean gap:      0.0077 ± 0.0026
+  Final-round forgetting per attack:
+    DoS  : +1.000 ± 0.000
+    Fuzzy: +0.962 ± 0.010
+    RPM  : +1.000 ± 0.000
+    gear : +0.000 ± 0.000
+
+[B] Malicious-client detection — separation (malicious / max honest):
+
+  flip_ratio = 100%  (extreme)
+    Ours (consolidation gap): 2.29x ± 0.95   (rank-1 correct: 3/3)
+    SHAP-divergence baseline: 1.48x ± 0.05   (rank-1 correct: 3/3)
+
+  flip_ratio = 30%  (realistic)
+    Ours (consolidation gap): 0.70x ± 0.32   (rank-1 correct: 1/3)
+    SHAP-divergence baseline: 1.79x ± 0.14   (rank-1 correct: 3/3)
