@@ -1,0 +1,18 @@
+======================================================================
+REACH EXPERIMENT — Chevrolet Spark (HCRL Survival Analysis)
+  seed=42, rounds=30, phases=['Flooding', 'Fuzzy', 'Malfunction']
+======================================================================
+
+Per-attack forgetting (final round):
+  Flooding    : +1.000
+  Fuzzy       : +0.943
+  Malfunction : +0.000
+
+Consolidation gap:
+  Transition-round mean: 0.0374
+  Steady-round mean:     0.0123
+  Ratio (transition / steady): 3.04x
+
+Comparison to HCRL Car-Hacking (2010 Hyundai Sonata):
+  HCRL gap ratio: 5.37x (95% bootstrap CI: [3.04, 13.65])
+  Spark gap ratio:  3.04x (single-seed, single-vehicle)

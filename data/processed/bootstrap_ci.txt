@@ -1,0 +1,23 @@
+======================================================================
+BOOTSTRAP 95% CI - consolidation-gap statistics
+  resamples = 5000, seeds = [42, 123, 7]
+  method    = clustered bootstrap (resample rounds within seed,
+              then average per-seed ratios)
+======================================================================
+
+Per-seed ratios (transition / steady):
+  seed  42: 4.12x
+  seed 123: 8.62x
+  seed   7: 3.37x
+
+Transition / steady ratio (mean across seeds):
+  point estimate : 5.37x
+  95% CI         : [3.04, 13.65]
+
+Transition-round mean gap:
+  point estimate : 0.0372
+  95% CI         : [0.0247, 0.0496]
+
+Steady-round mean gap:
+  point estimate : 0.0077
+  95% CI         : [0.0039, 0.0124]

@@ -1,0 +1,38 @@
+======================================================================
+30% FAILURE ANALYSIS + ENSEMBLE FIX ATTEMPT
+  seeds = [42, 123, 7], flip ratios = [1.0, 0.3]
+======================================================================
+
+[Part 1] Per-client gap distribution (gap values per round, across seeds)
+
+  flip_ratio = 100%:
+    client 0 (MALICIOUS): mean=0.1561  median=0.0656  std=0.1634  q25=0.0093  q75=0.2601
+    client 1 (honest   ): mean=0.0324  median=0.0015  std=0.0812  q25=0.0009  q75=0.0030
+    client 2 (honest   ): mean=0.0549  median=0.0171  std=0.0929  q25=0.0120  q75=0.0240
+    client 3 (honest   ): mean=0.0519  median=0.0198  std=0.0868  q25=0.0138  q75=0.0374
+
+  flip_ratio = 30%:
+    client 0 (MALICIOUS): mean=0.0460  median=0.0107  std=0.1045  q25=0.0078  q75=0.0166
+    client 1 (honest   ): mean=0.0681  median=0.0065  std=0.1788  q25=0.0044  q75=0.0136
+    client 2 (honest   ): mean=0.0404  median=0.0082  std=0.1147  q25=0.0062  q75=0.0099
+    client 3 (honest   ): mean=0.0604  median=0.0101  std=0.1506  q25=0.0070  q75=0.0123
+
+[Part 2] Separation across methods (mean ± std across 3 seeds)
+
+  flip_ratio = 100%:
+    Ours (gap)         : sep = 2.29x ± 0.95   rank-1 correct: 3/3
+    SHAP-divergence    : sep = 1.48x ± 0.05   rank-1 correct: 3/3
+    Ensemble α=0.3 (gap+SHAP): sep = 2.49x ± 0.15   rank-1 correct: 3/3
+    Ensemble α=0.5 (gap+SHAP): sep = 3.14x ± 0.61   rank-1 correct: 3/3
+    Ensemble α=0.7 (gap+SHAP): sep = 3.77x ± 1.61   rank-1 correct: 3/3
+
+  flip_ratio = 30%:
+    Ours (gap)         : sep = 0.70x ± 0.32   rank-1 correct: 1/3
+    SHAP-divergence    : sep = 1.79x ± 0.14   rank-1 correct: 3/3
+    Ensemble α=0.3 (gap+SHAP): sep = 2.37x ± 0.69   rank-1 correct: 3/3
+    Ensemble α=0.5 (gap+SHAP): sep = 1.43x ± 0.50   rank-1 correct: 3/3
+    Ensemble α=0.7 (gap+SHAP): sep = 0.91x ± 0.51   rank-1 correct: 1/3
+
+[Part 3] Best alpha per flip ratio (by mean separation)
+  flip_ratio = 100%: best α = 0.7   sep = 3.77x   rank-1: 3/3
+  flip_ratio = 30%: best α = 0.3   sep = 2.37x   rank-1: 3/3
