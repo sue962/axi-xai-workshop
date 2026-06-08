@@ -16,6 +16,8 @@ Key findings:
 
 We use the public HCRL Car-Hacking dataset (Song, Woo, Kim, *Vehicular Communications* vol. 21, 100198, 2020), collected from a real 2010 Hyundai Sonata. Download from <https://ocslab.hksecurity.net/Datasets/car-hacking-dataset> and place under `9) Car-Hacking Dataset/`. The dataset (~850 MB) is not included in this repository.
 
+For the reach experiment we additionally use the Chevrolet Spark subset of the HCRL Survival Analysis Dataset (<https://ocslab.hksecurity.net/Datasets/survival-ids>), placed under `dataset/Spark/`. Also not committed.
+
 ## Setup
 
 ```bash
@@ -36,6 +38,9 @@ Run them in order. All runs are deterministic (`SEED=42`).
 - `04_baselines.ipynb` runs SHAP and leave-one-client-out Shapley baselines on an IID FedAvg model, and produces the three-panel comparison figure.
 - `05_malicious_detection.ipynb` runs a synthetic label-flipping malicious-client scenario and compares per-client consolidation gap (ours) against per-client SHAP divergence (MDPI-style).
 - `06_robustness.py` runs sequential CFL and malicious-client detection across three seeds (42, 123, 7) and two flip ratios (100%, 30%), producing the mean ± std numbers reported in Sections 5–7 of the paper.
+- `07_bootstrap_ci.py` re-runs sequential CFL with per-round gap logging and computes a clustered bootstrap (5000 iterations) for the 95% CI on the transition-to-steady gap ratio.
+- `08_failure_analysis.py` diagnoses the 30% label-flip failure mode (per-client gap distribution, Figure 8) and sweeps a gap–SHAP ensemble over α ∈ {0.3, 0.5, 0.7}.
+- `09_reach_spark.py` runs the reach experiment on the Chevrolet Spark subset of the HCRL Survival Analysis Dataset and produces Figure 9.
 
 To execute end-to-end:
 
@@ -45,7 +50,7 @@ for nb in 01_preprocess 02_fl_baseline 03_nl_explanation 04_baselines 05_malicio
 done
 ```
 
-For the robustness sweep, run `python notebooks/06_robustness.py` after the five notebooks.
+After the five notebooks, run the four Python scripts in order: `python notebooks/06_robustness.py`, then `07_bootstrap_ci.py`, `08_failure_analysis.py`, `09_reach_spark.py`.
 
 Intermediate CSVs land in `data/processed/` and PNG figures in `figures/`.
 
