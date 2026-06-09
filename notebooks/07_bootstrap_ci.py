@@ -193,7 +193,8 @@ def run_sequential_cfl_detailed(seed):
         rows.append({
             'seed': seed,
             'round': r,
-            'gap': float(np.mean(gaps)),
+            'gap':     float(np.mean(gaps)),
+            'max_gap': float(np.max(gaps)),
             'is_transition': int(r in transition_rounds),
         })
     return pd.DataFrame(rows)
