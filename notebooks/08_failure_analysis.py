@@ -322,8 +322,9 @@ if __name__ == '__main__':
     print('Step 2 — Generating per-client gap distribution figure')
     print('=' * 70)
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
     flip_titles = {1.0: '100% label flip (extreme)', 0.3: '30% label flip (realistic)'}
+    ylims = {1.0: None, 0.3: (0, 0.08)}   # crop 30% panel outliers so boxes are visible
     for ax, flip in zip(axes, [1.0, 0.3]):
         sub = per_round[per_round['flip_ratio'] == flip]
         data = [sub[sub['client_id'] == cid]['gap'].values for cid in range(N_CLIENTS)]
@@ -344,6 +345,14 @@ if __name__ == '__main__':
         ax.set_title(flip_titles[flip])
         ax.set_ylabel('Per-round consolidation gap')
         ax.grid(True, axis='y', alpha=0.3)
+        if ylims[flip] is not None:
+            ax.set_ylim(*ylims[flip])
+            n_above = sum((sub[sub['client_id'] == cid]['gap'] > ylims[flip][1]).sum()
+                          for cid in range(N_CLIENTS))
+            if n_above > 0:
+                ax.text(0.98, 0.96, f'(+{n_above} outliers above)',
+                        transform=ax.transAxes, ha='right', va='top',
+                        fontsize=11, color='dimgray', style='italic')
     fig.suptitle('Per-client consolidation-gap distribution (3 seeds × 12 rounds)',
                  y=1.02)
     fig.tight_layout()
