@@ -24,7 +24,7 @@ Outputs:
     data/processed/failure_per_client.csv   — per-(seed, flip, round, client) raw gaps
     data/processed/failure_summary.csv      — per-(seed, flip) ours/shap/ensemble separations
     data/processed/failure_analysis.txt     — human-readable summary
-    figures/fig_8_per_client_gap_distribution.png — Part 1 main figure
+    figures/figure_8_per_client_gap_distribution.png — Part 1 main figure
 '''
 
 from pathlib import Path
@@ -347,7 +347,7 @@ if __name__ == '__main__':
     fig.suptitle('Per-client consolidation-gap distribution (3 seeds × 12 rounds)',
                  y=1.02)
     fig.tight_layout()
-    out_png = FIG_DIR / 'fig_8_per_client_gap_distribution.png'
+    out_png = FIG_DIR / 'figure_8_per_client_gap_distribution.png'
     fig.savefig(out_png, dpi=200, bbox_inches='tight')
     plt.close(fig)
     print(f'Saved: {out_png}')

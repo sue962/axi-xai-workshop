@@ -185,7 +185,7 @@ def main():
     ax.set_title(f'Per-round gap trajectory — {len(SEEDS)}-seed mean ± 1 std')
     ax.legend(loc='upper right'); ax.grid(alpha=0.3)
     plt.tight_layout()
-    out = FIG_DIR / 'fig_malicious_temporal.png'
+    out = FIG_DIR / 'figure_7_malicious_temporal.png'
     plt.savefig(out, dpi=200, bbox_inches='tight'); plt.close()
     print(f'saved: {out}')
 

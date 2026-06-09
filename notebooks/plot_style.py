@@ -17,6 +17,7 @@ def set_paper_style():
         'ytick.labelsize':   13,
         'legend.fontsize':   12,
         'figure.titlesize':  17,
+        'figure.titleweight':'bold',
         'axes.titleweight':  'bold',
         'axes.labelweight':  'bold',
     })

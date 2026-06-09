@@ -22,7 +22,7 @@ Pipeline:
 Outputs:
     data/processed/spark_combined.csv
     data/processed/spark_reach_summary.txt
-    figures/fig_9_spark_consolidation_gap.png
+    figures/figure_9_spark_consolidation_gap.png
 '''
 
 from pathlib import Path
@@ -327,7 +327,7 @@ def make_figure(gap_df, transition_rounds, ratio):
     ax.grid(True, alpha=0.3)
     ax.legend(loc='upper right')
     fig.tight_layout()
-    out = FIG_DIR / 'fig_9_spark_consolidation_gap.png'
+    out = FIG_DIR / 'figure_9_spark_consolidation_gap.png'
     fig.savefig(out, dpi=200, bbox_inches='tight')
     plt.close(fig)
     return out
