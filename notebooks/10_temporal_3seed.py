@@ -169,21 +169,23 @@ def main():
     # Plot — mean ± 1 std band per client
     agg = (gaps.groupby(['client_id', 'round'])['gap']
                 .agg(['mean', 'std']).reset_index())
-    fig, ax = plt.subplots(figsize=(10, 4.5))
+    fig, ax = plt.subplots(figsize=(10, 4))
     for cid in range(N_CLIENTS):
         sub = agg[agg['client_id'] == cid].sort_values('round')
         is_mal = cid == MAL_CLIENT
-        color = 'crimson' if is_mal else f'C{cid}'
-        label = f'client_{cid}' + (' (MAL)' if is_mal else '')
+        color = 'crimson' if is_mal else None
         ax.plot(sub['round'], sub['mean'], marker='o', markersize=4,
-                color=color, linewidth=2.2 if is_mal else 1.4,
-                linestyle='--' if is_mal else '-', label=label)
+                color=color, linewidth=2 if is_mal else 1.3,
+                linestyle='--' if is_mal else '-',
+                label=f'client_{cid}' + (' (MAL)' if is_mal else ''))
+        line_color = ax.lines[-1].get_color()
         ax.fill_between(sub['round'], sub['mean'] - sub['std'], sub['mean'] + sub['std'],
-                        color=color, alpha=0.15)
+                        color=line_color, alpha=0.18)
     ax.set_xlabel('FL round')
     ax.set_ylabel('Mean |fast − slow|  (per client)')
-    ax.set_title(f'Per-round gap trajectory — {len(SEEDS)}-seed mean ± 1 std')
-    ax.legend(loc='upper right'); ax.grid(alpha=0.3)
+    ax.set_title('Our temporal advantage: per-round gap trajectory\n'
+                 '(the malicious client diverges consistently — SHAP only gives one number)')
+    ax.legend(); ax.grid(alpha=0.3)
     plt.tight_layout()
     out = FIG_DIR / 'figure_7_malicious_temporal.png'
     plt.savefig(out, dpi=200, bbox_inches='tight'); plt.close()
