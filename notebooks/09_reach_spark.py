@@ -35,6 +35,10 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from plot_style import set_paper_style
+set_paper_style()
 
 # -------------------------- paths --------------------------
 NOTEBOOK_DIR = Path.cwd()
@@ -311,9 +315,9 @@ def compute_metrics(slow_df, fast_df):
 
 
 def make_figure(gap_df, transition_rounds, ratio):
-    fig, ax = plt.subplots(figsize=(8, 3.5))
+    fig, ax = plt.subplots(figsize=(10, 4.5))
     ax.plot(gap_df['round'], gap_df['gap'], marker='o', color='#1f5fa8',
-            linewidth=1.4, markersize=4, label='Consolidation gap')
+            linewidth=2.0, markersize=6, label='Consolidation gap')
     for tr in transition_rounds:
         ax.axvline(tr, color='#d94545', linestyle='--', alpha=0.55,
                    linewidth=1.0)

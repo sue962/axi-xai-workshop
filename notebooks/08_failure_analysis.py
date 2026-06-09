@@ -38,6 +38,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import shap
 import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent) if '__file__' in dir() else str(Path.cwd()))
+from plot_style import set_paper_style
+set_paper_style()
 
 NOTEBOOK_DIR = Path.cwd()
 PROJECT_ROOT = NOTEBOOK_DIR.parent if NOTEBOOK_DIR.name == 'notebooks' else NOTEBOOK_DIR
@@ -318,15 +322,18 @@ if __name__ == '__main__':
     print('Step 2 — Generating per-client gap distribution figure')
     print('=' * 70)
 
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
     flip_titles = {1.0: '100% label flip (extreme)', 0.3: '30% label flip (realistic)'}
     for ax, flip in zip(axes, [1.0, 0.3]):
         sub = per_round[per_round['flip_ratio'] == flip]
         data = [sub[sub['client_id'] == cid]['gap'].values for cid in range(N_CLIENTS)]
         bp = ax.boxplot(
-            data, positions=range(N_CLIENTS), widths=0.55, patch_artist=True,
-            medianprops={'color': 'black', 'linewidth': 1.2},
-            flierprops={'marker': 'o', 'markersize': 3, 'alpha': 0.5},
+            data, positions=range(N_CLIENTS), widths=0.7, patch_artist=True,
+            medianprops={'color': 'black', 'linewidth': 1.8},
+            flierprops={'marker': 'o', 'markersize': 5, 'alpha': 0.6},
+            whiskerprops={'linewidth': 1.5},
+            capprops={'linewidth': 1.5},
+            boxprops={'linewidth': 1.5},
         )
         for i, patch in enumerate(bp['boxes']):
             patch.set_facecolor('#d94545' if i == 0 else '#bbbbbb')
@@ -338,7 +345,7 @@ if __name__ == '__main__':
         ax.set_ylabel('Per-round consolidation gap')
         ax.grid(True, axis='y', alpha=0.3)
     fig.suptitle('Per-client consolidation-gap distribution (3 seeds × 12 rounds)',
-                 fontsize=12, y=1.02)
+                 y=1.02)
     fig.tight_layout()
     out_png = FIG_DIR / 'fig_8_per_client_gap_distribution.png'
     fig.savefig(out_png, dpi=200, bbox_inches='tight')
