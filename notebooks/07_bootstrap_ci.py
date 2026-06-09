@@ -24,7 +24,10 @@ from torch.utils.data import DataLoader, TensorDataset
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-DATA_DIR = Path('/Users/lucia/Dropbox/USYD/Semester1_2026/AXI/data/processed')
+NOTEBOOK_DIR = Path.cwd()
+PROJECT_ROOT = NOTEBOOK_DIR.parent if NOTEBOOK_DIR.name == 'notebooks' else NOTEBOOK_DIR
+
+DATA_DIR = PROJECT_ROOT / 'data/processed'
 OUT_DIR  = DATA_DIR
 
 N_CLIENTS    = 4

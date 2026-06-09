@@ -37,9 +37,12 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 # -------------------------- paths --------------------------
-RAW_DIR  = Path('/Users/lucia/Dropbox/USYD/Semester1_2026/AXI/dataset/Spark')
-DATA_DIR = Path('/Users/lucia/Dropbox/USYD/Semester1_2026/AXI/data/processed')
-FIG_DIR  = Path('/Users/lucia/Dropbox/USYD/Semester1_2026/AXI/figures')
+NOTEBOOK_DIR = Path.cwd()
+PROJECT_ROOT = NOTEBOOK_DIR.parent if NOTEBOOK_DIR.name == 'notebooks' else NOTEBOOK_DIR
+
+RAW_DIR  = PROJECT_ROOT / 'dataset/Spark'
+DATA_DIR = PROJECT_ROOT / 'data/processed'
+FIG_DIR  = PROJECT_ROOT / 'figures'
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 

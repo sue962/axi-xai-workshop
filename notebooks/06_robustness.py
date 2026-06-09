@@ -6,8 +6,8 @@ Reproduces the headline numbers from notebooks 02/03/05 across three seeds
 malicious-client scenario alongside the existing 100% flip.
 
 Outputs:
-    /Users/lucia/Dropbox/USYD/Semester1_2026/AXI/data/processed/robustness_summary.csv
-    /Users/lucia/Dropbox/USYD/Semester1_2026/AXI/data/processed/robustness_summary.txt
+    data/processed/robustness_summary.csv
+    data/processed/robustness_summary.txt
 '''
 
 from pathlib import Path
@@ -21,7 +21,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 import shap
 
-DATA_DIR = Path('/Users/lucia/Dropbox/USYD/Semester1_2026/AXI/data/processed')
+NOTEBOOK_DIR = Path.cwd()
+PROJECT_ROOT = NOTEBOOK_DIR.parent if NOTEBOOK_DIR.name == 'notebooks' else NOTEBOOK_DIR
+
+DATA_DIR = PROJECT_ROOT / 'data/processed'
 OUT_DIR  = DATA_DIR
 
 # Shared config — matches notebooks 02 / 04 / 05
